@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Rock, Paper, Scissors Game</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <h1>Rock, Paper, Scissors</h1>
+
+        <div id='choices'>
+            <button id='rock'><img src="images/rock.png" alt="Rock"></button> 
+            <button id='paper'><img src="images/paper.png" alt="Paper"></button>
+            <button id='scissors'><img src="images/scissors.png" alt="Scissors"></button>
+
+        </div>
+        <div id = "RoundResult"> </div>
+        <br>
+        <div id = "Score"></div>
+        <br><br>
+        <div id = 'restart'> 
+            <button id='again' onclick="window.location.reload();">Play Again</button>
+        </div>
+
+
+        <script>
+
+            const rock = document.querySelector('#rock');
+            const paper = document.querySelector('#paper');
+            const scissors = document.querySelector('#scissors');
+            let roundRes = document.getElementById('RoundResult');
+            let scoreDiv = document.getElementById('Score');
+            let restart = document.getElementById('again');
+            restart.style.display = 'none'
+            let playerScore = 0;
+            let compScore = 0;
+
+
+            rock.addEventListener('click', () => {
+                let res = playRound('rock', computerPlay())
+                roundRes.innerHTML = res + "<br>";
+                let score = keepScore(res);
+                scoreDiv.innerHTML = score;
+                });
+
+            paper.addEventListener('click', () => {
+                let res = playRound('paper', computerPlay())
+                roundRes.innerHTML = res + "<br>";
+                let score = keepScore(res);
+                scoreDiv.innerHTML = score;
+                });
+            scissors.addEventListener('click', () => {
+                let res = playRound('scissors', computerPlay())
+                roundRes.innerHTML = res + "<br>";
+                let score = keepScore(res);
+                scoreDiv.innerHTML = score;
+                });
+
+            function keepScore(result) {
+                    if(playerScore == 4 && compScore < 5) {
+                        restart.style.display = 'block'
+                        return "<h1> Player Wins! </h1>";
+                    }
+                    else if(compScore == 4 && playerScore < 5) {
+                        restart.style.display = 'block'
+                        return "<h1> Computer Wins! </h1>";
+                    }
+                    else {
+                        // if(playerScore < 5 && compScore < 5) {
+                            if( result.charAt(4) == 'W') {
+                                    playerScore += 1;
+                            }
+                            else if (result.charAt(4) == 'L') {
+                                    compScore += 1;
+                            }
+                            return "Score: P: " + playerScore + " PC: " + compScore;
+                }       
+                
+            }
+
+
+            function playRound (playerSelection, computerSelection) {
+                playerSelection = playerSelection.toLowerCase();
+                computerSelection = computerSelection.toLowerCase();
+
+                if (playerSelection === computerSelection) {
+                    return "It is a tie!";
+                }
+                else if (playerSelection == 'rock' && computerSelection == 'paper') {
+                    return "You Lose! " + computerSelection + " beats " + playerSelection;
+                }
+                else if (playerSelection == 'paper' && computerSelection == 'scissors') {
+                    return "You Lose! " + computerSelection + " beats " + playerSelection;
+                }
+                else if (playerSelection == 'scissors' && computerSelection == 'rock') {
+                    return "You Lose! " + computerSelection + " beats " + playerSelection;
+                }
+                else {
+                    return "You Win! " + playerSelection + " beats " + computerSelection;
+                }
+            }
+                        
+            function randomNum () { //Number between 0 and 2 inclusive
+                let min = 0;
+                let max = 2;
+                let num = Math.floor(Math.random() * (max-min + 1)) + min; 
+                return num;
+            }
+  
+            function computerPlay() {
+                let choice = '';
+                const num = randomNum()
+                if (num == 0) {
+                    choice = 'rock';
+                }
+                else if (num == 1) {
+                    choice = 'paper';
+                }
+                else {
+                    choice = 'scissors';
+                }
+                return choice;
+            }
+            
+
+            //  function game() {
+            //     let playerScore = 0;
+            //     let computerScore = 0;
+            //     for(let i = 0; i < 5; i++) {
+            //         const playerSelection = prompt("What do you choose?");
+            //         const computerSelection = computerPlay();
+            //         let game = playRound(playerSelection, computerSelection);
+            //         console.log(game);
+            //         if( game.charAt(4) == 'W') {
+            //             playerScore += 1;
+            //         }
+            //         else if (game.charAt(4) == 'L') {
+            //             computerScore += 1;
+            //         }
+            //     }
+            //     if (playerScore > computerScore) {
+            //         console.log("Player wins! Score was " + playerScore + "-" + computerScore);
+            //     }
+            //     else if (computerScore > playerScore) {
+            //         console.log("Computer wins! Score was " + computerScore + "-" + playerScore);
+            //     }
+            //     else {
+            //         console.log("Tie Game! Score was " + playerScore + "-" + computerScore);
+            //     }
+            // }
+        </script>
+    </body>
+</html>

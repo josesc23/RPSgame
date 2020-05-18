@@ -1,0 +1,33 @@
+body {
+    background-color: black;
+}
+h1 {
+    text-align: center;
+    color: lightblue;
+}
+
+#choices, #restart {
+    /* background-color: lightblue; */
+    display: flex; /* using flexbox */
+    align-items: center;
+    justify-content: center;
+}
+button {
+    font-size: 50px;
+    background-color: lightblue;
+}
+
+#rock, #paper, #scissors {
+    margin: 15px;
+}
+
+img {
+    width: 400px;
+    height: 400px;
+}
+#RoundResult, #Score {
+    color:lightblue;
+    display: flex; /* using flexbox */
+    align-items: center;
+    justify-content: center;
+}
